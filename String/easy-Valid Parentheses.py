@@ -27,3 +27,22 @@ class Solution:
                 return False
 
 #not fast, need to improve
+
+class Solution1:
+    def isValid(self, s: str) -> bool:
+        map_bracket = {
+            "}" : "{",
+            "]" : "[",
+            ")" : "(",
+        }
+        stack = []
+        for ele in s:
+            if stack and ele in map_bracket.keys():
+                if stack[-1] == map_bracket[ele]:
+                    stack.pop()
+                    continue
+                else:
+                    return False
+            stack.append(ele)
+        return stack == []
+    
