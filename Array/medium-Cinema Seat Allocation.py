@@ -20,12 +20,11 @@ class Solution:
             if col<8 and col>3:
                 mid.add(row)
         for i in (left|right|mid):
-            if i not in left and i not in right:
-                count+=2
-            elif i not in mid:
+            if i not in mid:
                 count+=1
             elif i not in left or i not in right:
                 count+=1
         count+=2*(n-len(left|right|mid))
         return count
+#don't need to think about 1&10 since they can not be sitted based on the requirement.
     
