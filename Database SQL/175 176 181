@@ -1,0 +1,39 @@
+# Write your MySQL query statement below
+
+
+175. Combine Two Tables
+
+SELECT p.FirstName, p.LastName, a.City, a.State
+FROM Person p LEFT JOIN Address a 
+ON p.PersonID=a.PersonID;
+
+
+176. Second Highest Salary
+
+If there is no second highest salary, it will show wrong. 
+IFNULL function: IFNULL(expression1, expression2);
+MySQL IFNULL() takes two expressions and if the first expression is not NULL, it returns the first expression. Otherwise, it returns the second expression.
+
+SELECT 
+    IFNULL(
+        (SELECT DISTINCT Salary 
+        FROM Employee
+        ORDER BY Salary DESC
+        LIMIT 1,1),
+    NULL) AS SecondHighestSalary;
+
+181. Employees Earning More Than Their Managers
+
+SELECT e.Name AS Employee
+FROM Employee e, (SELECT *
+      FROM Employee) AS m
+WHERE e.ManagerID=m.ID
+AND e.Salary>m.Salary;
+
+Can just From table twice:
+SELECT e.Name AS Employee
+FROM 
+      Employee AS e, 
+      Employee AS m
+WHERE e.ManagerID=m.ID
+AND e.Salary>m.Salary;
