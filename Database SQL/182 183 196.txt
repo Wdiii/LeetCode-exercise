@@ -1,5 +1,6 @@
 # Write your MySQL query statement below
 
+
 182. Duplicate Emails
 
 SELECT Email
@@ -25,3 +26,5 @@ WHERE o.customerid IS NULL
 DELETE p
 FROM person AS p, person AS t
 WHERE p.email=t.email AND p.id>t.id
+
+first time to see, delete the whole row
