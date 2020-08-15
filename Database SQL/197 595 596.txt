@@ -1,0 +1,25 @@
+# Write your MySQL query statement below
+
+
+197. Rising Temperature
+
+SELECT t.id
+FROM weather AS w, weather AS t
+WHERE TIMESTAMPDIFF(DAY,w.recorddate,t.recorddate)=1 AND w.temperature<t.temperature
+
+can use DATEDIFF(w.recorddate,t.recorddate)=1 
+
+
+595. Big Countries
+
+SELECT name, population, area
+FROM world
+WHERE area>3000000 OR population>25000000
+
+
+596. Classes More Than 5 Students
+
+SELECT class
+FROM courses
+GROUP BY class
+HAVING COUNT(DISTINCT student)>=5
