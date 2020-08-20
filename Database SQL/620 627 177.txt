@@ -1,0 +1,36 @@
+# Write your MySQL query statement below
+
+620. Not Boring Movies
+
+SELECT *
+FROM cinema
+WHERE description<>'boring'
+AND id%2=1
+ORDER BY rating DESC
+
+We can use the mod(id,2)=1 to determine the odd id
+
+627. Swap Salary
+
+UPDATE salary
+SET sex = IF (sex='m', 'f', 'm')
+
+UPDATE salary
+SET sex = CASE 
+    WHEN sex='m' THEN 'f'
+    ELSE 'm'
+    END
+
+177. Nth Highest Salary
+
+CREATE FUNCTION getNthHighestSalary(N INT) RETURNS INT
+BEGIN
+  RETURN (
+      # Write your MySQL query statement below.
+      SELECT IF (COUNT(t.Salary)=N, MIN(t.Salary), null)
+      FROM (SELECT DISTINCT Salary
+           FROM Employee
+           ORDER BY Salary DESC
+           LIMIT N) AS t
+  );
+END
