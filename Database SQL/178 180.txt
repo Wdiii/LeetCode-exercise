@@ -1,0 +1,33 @@
+# Write your MySQL query statement below
+
+
+178. Rank Scores
+
+SELECT Score, DENSE_RANK() OVER (ORDER BY Score DESC) AS 'Rank' 
+FROM Scores
+
+#use Dense Rank function: 
+https://docs.microsoft.com/en-us/sql/t-sql/functions/dense-rank-transact-sql?view=sql-server-ver15
+DENSE_RANK ( ) OVER ( [ <partition_by_clause> ] < order_by_clause > )
+
+
+180. Consecutive Numbers
+
+SELECT DISTINCT one.Num AS ConsecutiveNums
+FROM Logs AS one, Logs AS two, Logs AS three 
+WHERE two.Id-one.Id=1 AND three.Id-two.Id=1
+AND one.Num=two.Num AND three.Num=two.Num
+
+#Another solution use Lead() function from leetcode:
+LEAD(return_value ,offset [,default]) 
+OVER (
+    [PARTITION BY partition_expression, ... ]
+    ORDER BY sort_expression [ASC | DESC], ...)
+
+SELECT DISTINCT Num AS ConsecutiveNums 
+FROM (
+SELECT Id, Num, LEAD(Num, 1) OVER() AS leadNum1, LEAD(Num, 2) OVER() AS leadNum2 
+FROM Logs) A
+WHERE A. Num = A.leadNum1 AND A.Num = A.leadNum2
+
+
