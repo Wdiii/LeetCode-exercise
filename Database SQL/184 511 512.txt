@@ -1,0 +1,33 @@
+# Write your MySQL query statement below
+
+
+184. Department Highest Salary
+
+SELECT d.Name AS Department, e.Name AS Employee, e.Salary
+FROM Employee e JOIN Department d 
+ON e.DepartmentId=d.Id
+WHERE (e.DepartmentId, e.Salary) IN      ----> need to have () in this step
+(SELECT DepartmentId, Max(Salary) AS Salary 
+FROM Employee
+GROUP BY DepartmentID) 
+
+
+511 Game Play Analysis I
+
+SELECT player_id, MIN(event_date) AS first_login
+FROM Activity
+GROUP BY player_id
+
+
+512 Game Play Analysis II
+
+SELECT a.player_id, a.device_id
+FROM Activity a
+WHERE (a.player_id, a.event_date) IN
+(SELECT player_id, MIN(event_date) AS first_login
+FROM Activity
+GROUP BY player_id)
+
+#or we can use right join
+
+
