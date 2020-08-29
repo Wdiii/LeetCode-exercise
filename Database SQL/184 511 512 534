@@ -9,14 +9,14 @@ ON e.DepartmentId=d.Id
 WHERE (e.DepartmentId, e.Salary) IN      ----> need to have () in this step
 (SELECT DepartmentId, Max(Salary) AS Salary 
 FROM Employee
-GROUP BY DepartmentID) 
+GROUP BY DepartmentID); 
 
 
 511 Game Play Analysis I
 
 SELECT player_id, MIN(event_date) AS first_login
 FROM Activity
-GROUP BY player_id
+GROUP BY player_id;
 
 
 512 Game Play Analysis II
@@ -26,8 +26,17 @@ FROM Activity a
 WHERE (a.player_id, a.event_date) IN
 (SELECT player_id, MIN(event_date) AS first_login
 FROM Activity
-GROUP BY player_id)
+GROUP BY player_id);
 
 #or we can use right join
 
+
+534 Game Play Analysis III
+
+SELECT a.player_id, a.event_date, SUM(games_played) AS games_played_so_far
+FROM Activity a, Activity b 
+WHERE a.player_id=b.player_id 
+AND b.event_date<=a.event_date
+GROUP BY a.player_id, a.event_date
+ORDER BY a.player_id, a.event_date; 
 
