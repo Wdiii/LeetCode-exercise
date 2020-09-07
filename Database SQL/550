@@ -11,3 +11,14 @@ AND (a1.player_id, a1.event_date) IN
 (SELECT player_id, MIN(event_date)
 FROM Activity
 GROUP BY player_id)
+
+DATE_ADD() 函数向日期添加指定的时间间隔。
+
+select round(count(*)/(select count(distinct player_id) from Activity), 2) fraction
+from Activity a
+where (player_id, event_date) in
+(
+    select player_id, date_add(min(event_date), interval 1 day) first_day
+    from Activity
+    group by player_id
+)
